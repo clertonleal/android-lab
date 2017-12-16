@@ -1,141 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#1E063C"
-    tools:context="clertonleal.com.weather.view.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/toLable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/to"
-        android:textColor="#8F839E"
-        app:layout_constraintEnd_toEndOf="@+id/toText"
-        app:layout_constraintStart_toStartOf="@+id/toText"
-        app:layout_constraintTop_toBottomOf="@+id/cityText" />
+    <data>
 
-    <TextView
-        android:id="@+id/toText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/stateText"
-        app:layout_constraintTop_toBottomOf="@+id/toLable"
-        android:text="@string/empty_field"
-        tools:text="31 dez" />
+        <variable
+            name="viewModel"
+            type="clertonleal.com.weather.viewModel.HomeViewModel" />
 
-    <TextView
-        android:id="@+id/fromLable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/from"
-        android:textColor="#8F839E"
-        app:layout_constraintEnd_toEndOf="@+id/fromText"
-        app:layout_constraintStart_toStartOf="@+id/fromText"
-        app:layout_constraintTop_toBottomOf="@+id/cityText" />
+        <import type="clertonleal.com.weather.picker.PickerInput"/>
+    </data>
 
-    <TextView
-        android:id="@+id/fromText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/stateText"
-        app:layout_constraintTop_toBottomOf="@+id/fromLable"
-        android:text="@string/empty_field"
-        tools:text="30 dez" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1E063C"
+        tools:context="clertonleal.com.weather.view.activity.MainActivity">
 
-    <TextView
-        android:id="@+id/cityLable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/city"
-        android:textColor="#8F839E"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/toLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/to"
+            android:textColor="#8F839E"
+            app:layout_constraintEnd_toEndOf="@+id/toText"
+            app:layout_constraintStart_toStartOf="@+id/toText"
+            app:layout_constraintTop_toBottomOf="@+id/cityText" />
 
-    <TextView
-        android:id="@+id/stateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
-        android:textColor="@android:color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityLable"
-        android:text="@string/empty_field"
-        tools:text="RS" />
+        <TextView
+            android:id="@+id/toText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/empty_field"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:onClick="@{(view) -> viewModel.openDatePicker(PickerInput.TO)}"
+            app:layout_constraintStart_toEndOf="@+id/stateText"
+            app:layout_constraintTop_toBottomOf="@+id/toLabel"
+            tools:text="31 dez" />
 
-    <TextView
-        android:id="@+id/cityText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stateText"
-        android:text="@string/empty_field"
-        tools:text="Porto Alegre" />
+        <TextView
+            android:id="@+id/fromLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/from"
+            android:textColor="#8F839E"
+            app:layout_constraintEnd_toEndOf="@+id/fromText"
+            app:layout_constraintStart_toStartOf="@+id/fromText"
+            app:layout_constraintTop_toBottomOf="@+id/cityText" />
 
-    <TextView
-        android:id="@+id/weatherLable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/weather"
-        android:textColor="#8F839E"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromText" />
+        <TextView
+            android:id="@+id/fromText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:text="@string/empty_field"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:onClick="@{(view) -> viewModel.openDatePicker(PickerInput.FROM)}"
+            app:layout_constraintEnd_toStartOf="@+id/stateText"
+            app:layout_constraintTop_toBottomOf="@+id/fromLabel"
+            tools:text="30 dez" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/weatherList"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherLable" />
+        <TextView
+            android:id="@+id/cityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/city"
+            android:textColor="#8F839E"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/searchButton"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_search_white_24px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherList" />
+        <TextView
+            android:id="@+id/stateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:onClick="@{(view) -> viewModel.selectCity()}"
+            android:text="@{viewModel.selectedCity.stateAcronym}"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityLabel"
+            tools:text="RS" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/cityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:text="@{viewModel.selectedCity.district}"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stateText"
+            tools:text="Porto Alegre" />
+
+        <TextView
+            android:id="@+id/weatherLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/weather"
+            android:textColor="#8F839E"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fromText" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/weatherList"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="@{viewModel.weatherVisibility}"
+            app:data="@{viewModel.selectedWeather}"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weatherLabel" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/searchButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_search_white_24px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weatherList" />
+
+        <RelativeLayout
+            android:id="@+id/loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            android:visibility="@{viewModel.loadingVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/empty_field"
+            android:textColor="@android:color/white"
+            android:visibility="@{viewModel.emptyWeatherVisibility}"
+            android:onClick="@{(view) -> viewModel.selectWeather()}"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/weatherList" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
