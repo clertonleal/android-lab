@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">weather</string>
+    <string name="app_name">Weather</string>
     <string name="empty_field">---</string>
     <string name="days">Dias</string>
     <string name="city">Cidade</string>
+    <string name="cities">Cidades</string>
     <string name="weather">Climas</string>
+    <string name="results">Veja seus resultados</string>
     <string name="select">Selecionar</string>
+    <string name="internet_error">Error de conexão\ntente novamente</string>
 </resources>

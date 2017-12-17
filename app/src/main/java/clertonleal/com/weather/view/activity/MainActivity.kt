@@ -12,7 +12,6 @@ import clertonleal.com.weather.databinding.ActivityMainBinding
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
 import clertonleal.com.weather.rest.CityRest
-import clertonleal.com.weather.rest.WeatherDataRest
 import clertonleal.com.weather.rest.WeatherRest
 import clertonleal.com.weather.util.*
 import clertonleal.com.weather.view.`interface`.HomeView
@@ -30,27 +29,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var weatherRest: WeatherRest
 
-    @Inject
-    lateinit var weatherDataRest: WeatherDataRest
-
     private var viewModel: HomeViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WeatherApplication.component?.inject(this)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        val view: HomeView = object : HomeView {
-
-            override fun openSelectWeather(weather: List<Weather>, selectedWeather: List<Weather>) {
-                SelectWeatherActivity.selectWeather(this@MainActivity, weather, selectedWeather)
-            }
-
-            override fun openSelectCities(cities: List<City>) {
-                SelectCitiesActivity.selectCity(this@MainActivity, cities)
-            }
-
-        }
         viewModel = HomeViewModel(view, cityRest, weatherRest)
         binding.viewModel = viewModel
         viewModel?.loadCity()
@@ -58,16 +42,6 @@ class MainActivity : AppCompatActivity() {
         weatherList.adapter = WeatherHomeAdapter(viewModel?.selectedWeather as ArrayList<Weather>, {
             viewModel?.selectWeather()
         })
-
-//        weatherDataRest.getWeatherData("455821", 2017)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({ cities ->
-//                    stateText.text = cities.size.toString()
-//                    Log.e("", cities.size.toString())
-//                }
-//                        , { error ->
-//                    Log.e("", error.message)
-//                })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -79,5 +53,21 @@ class MainActivity : AppCompatActivity() {
                 viewModel?.selectedWeather = it
             }
         }
+    }
+
+    val view: HomeView = object : HomeView {
+
+        override fun openResult(weather: ArrayList<Weather>, days: Int, city: City) {
+            ResultActivity.start(this@MainActivity, weather, days, city)
+        }
+
+        override fun openSelectWeather(weather: List<Weather>, selectedWeather: List<Weather>) {
+            SelectWeatherActivity.selectWeather(this@MainActivity, weather, selectedWeather)
+        }
+
+        override fun openSelectCities(cities: List<City>) {
+            SelectCitiesActivity.selectCity(this@MainActivity, cities)
+        }
+
     }
 }

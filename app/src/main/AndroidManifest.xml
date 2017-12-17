@@ -7,9 +7,9 @@
     <application
         android:name=".WeatherApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/weather_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/weather_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.activity.MainActivity">
@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.SelectCitiesActivity" />
-        <activity android:name=".view.activity.SelectWeatherActivity"></activity>
+        <activity android:name=".view.activity.SelectCitiesActivity" android:label="@string/cities"/>
+        <activity android:name=".view.activity.SelectWeatherActivity" android:label="@string/weather"/>
+        <activity android:name=".view.activity.ResultActivity" android:label="@string/results"/>
     </application>
 
 </manifest>

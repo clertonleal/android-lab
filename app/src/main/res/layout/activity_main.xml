@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="clertonleal.com.weather.viewModel.HomeViewModel" />
-
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -30,13 +28,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cityText" />
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/fromText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="@{viewModel.numberOfDays}"
+            android:text="@={viewModel.numberOfDays}"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -128,10 +126,27 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_search_white_24px"
+            android:onClick="@{(view) -> viewModel.openResults()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weatherList" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/empty_field"
+            android:textColor="@android:color/white"
+            android:visibility="@{viewModel.emptyWeatherVisibility}"
+            android:onClick="@{(view) -> viewModel.selectWeather()}"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/weatherList" />
 
         <RelativeLayout
             android:id="@+id/loading"
@@ -152,21 +167,29 @@
                 android:layout_centerInParent="true" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/empty_field"
-            android:textColor="@android:color/white"
-            android:visibility="@{viewModel.emptyWeatherVisibility}"
-            android:onClick="@{(view) -> viewModel.selectWeather()}"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/weatherList" />
+        <RelativeLayout
+            android:id="@+id/error"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            android:visibility="@{viewModel.errorVisibility}"
+            android:onClick="@{(view) -> viewModel.retryFromError()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/internet_error"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

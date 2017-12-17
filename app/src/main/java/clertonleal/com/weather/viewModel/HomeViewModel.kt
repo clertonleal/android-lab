@@ -24,7 +24,7 @@ class HomeViewModel(val view: HomeView,
     }
 
     @Bindable
-    var selectedWeather: List<Weather> = arrayListOf()
+    var selectedWeather: ArrayList<Weather> = arrayListOf()
     set(value) {
         field = value
         notifyPropertyChanged(BR.selectedWeather)
@@ -40,6 +40,7 @@ class HomeViewModel(val view: HomeView,
     private var cities: List<City> = arrayListOf()
     var weather: List<Weather> = arrayListOf()
     val loadingVisibility = ObservableInt(View.VISIBLE)
+    val errorVisibility = ObservableInt(View.GONE)
     val weatherVisibility = ObservableInt(View.GONE)
     val emptyWeatherVisibility = ObservableInt(View.VISIBLE)
     val numberOfDays = ObservableField<String>()
@@ -50,10 +51,10 @@ class HomeViewModel(val view: HomeView,
                 .subscribe({
                     cities = it
                     loadingVisibility.set(View.GONE)
-                    Log.e("", cities.size.toString())
-                }
-                        , { error ->
-                    Log.e("", error.message)
+                }, { error ->
+                    Log.e(HomeViewModel::class.java.simpleName, error.message, error)
+                    errorVisibility.set(View.VISIBLE)
+                    loadingVisibility.set(View.GONE)
                 })
     }
 
@@ -63,10 +64,10 @@ class HomeViewModel(val view: HomeView,
                 .subscribe({
                     weather = it
                     loadingVisibility.set(View.GONE)
-                    Log.e("", weather.size.toString())
-                }
-                        , { error ->
-                    Log.e("", error.message)
+                }, { error ->
+                    Log.e(HomeViewModel::class.java.simpleName, error.message, error)
+                    errorVisibility.set(View.VISIBLE)
+                    loadingVisibility.set(View.GONE)
                 })
     }
 
@@ -76,6 +77,17 @@ class HomeViewModel(val view: HomeView,
 
     fun selectWeather() {
         view.openSelectWeather(weather, selectedWeather)
+    }
+
+    fun openResults() {
+        view.openResult(selectedWeather, numberOfDays.get().toInt(), selectedCity!!)
+    }
+
+    fun retryFromError() {
+        errorVisibility.set(View.GONE)
+        loadingVisibility.set(View.VISIBLE)
+        loadCity()
+        loadWeather()
     }
 
 }
