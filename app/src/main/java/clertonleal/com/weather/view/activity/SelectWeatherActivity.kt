@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import clertonleal.com.weather.R
 import clertonleal.com.weather.adapter.WeatherAdapter
 import clertonleal.com.weather.model.Weather
@@ -11,7 +13,6 @@ import clertonleal.com.weather.util.SEARCH_WEATHER_REQUEST
 import clertonleal.com.weather.util.SELECTED_WEATHER
 import clertonleal.com.weather.util.WEATHER
 import kotlinx.android.synthetic.main.activity_search.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SelectWeatherActivity : AppCompatActivity() {
@@ -29,12 +30,17 @@ class SelectWeatherActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
-    override fun onBackPressed() {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.weather_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val intent = Intent()
         intent.putParcelableArrayListExtra(SELECTED_WEATHER, adapter?.selectedWeather as ArrayList<Weather>)
         setResult(Activity.RESULT_OK, intent)
         finish()
-        super.onBackPressed()
+        return true
     }
 
     companion object {

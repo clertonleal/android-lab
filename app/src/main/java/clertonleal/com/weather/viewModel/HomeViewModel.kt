@@ -1,15 +1,11 @@
 package clertonleal.com.weather.viewModel
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableInt
+import android.databinding.*
 import android.util.Log
 import android.view.View
 import clertonleal.com.weather.BR
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
-import clertonleal.com.weather.picker.PickerInput
 import clertonleal.com.weather.rest.CityRest
 import clertonleal.com.weather.rest.WeatherRest
 import clertonleal.com.weather.view.`interface`.HomeView
@@ -39,7 +35,6 @@ class HomeViewModel(val view: HomeView,
             weatherVisibility.set(View.VISIBLE)
             emptyWeatherVisibility.set(View.GONE)
         }
-
     }
 
     private var cities: List<City> = arrayListOf()
@@ -47,6 +42,7 @@ class HomeViewModel(val view: HomeView,
     val loadingVisibility = ObservableInt(View.VISIBLE)
     val weatherVisibility = ObservableInt(View.GONE)
     val emptyWeatherVisibility = ObservableInt(View.VISIBLE)
+    val numberOfDays = ObservableField<String>()
 
     fun loadCity() {
         cityRest.getCities()
@@ -82,7 +78,4 @@ class HomeViewModel(val view: HomeView,
         view.openSelectWeather(weather, selectedWeather)
     }
 
-    fun openDatePicker(input: PickerInput) {
-        view.openDatePicker(input)
-    }
 }

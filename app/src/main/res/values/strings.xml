@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">weather</string>
     <string name="empty_field">---</string>
-    <string name="to">Até</string>
-    <string name="from">De</string>
+    <string name="days">Dias</string>
     <string name="city">Cidade</string>
     <string name="weather">Climas</string>
+    <string name="select">Selecionar</string>
 </resources>

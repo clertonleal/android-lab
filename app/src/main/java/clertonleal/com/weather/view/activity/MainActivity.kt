@@ -1,7 +1,6 @@
 package clertonleal.com.weather.view.activity
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,8 +11,6 @@ import clertonleal.com.weather.adapter.WeatherHomeAdapter
 import clertonleal.com.weather.databinding.ActivityMainBinding
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
-import clertonleal.com.weather.picker.DatePicker
-import clertonleal.com.weather.picker.PickerInput
 import clertonleal.com.weather.rest.CityRest
 import clertonleal.com.weather.rest.WeatherDataRest
 import clertonleal.com.weather.rest.WeatherRest
@@ -44,10 +41,6 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val view: HomeView = object : HomeView {
-
-            override fun openDatePicker(input: PickerInput) {
-                DatePicker().show(supportFragmentManager, "")
-            }
 
             override fun openSelectWeather(weather: List<Weather>, selectedWeather: List<Weather>) {
                 SelectWeatherActivity.selectWeather(this@MainActivity, weather, selectedWeather)
