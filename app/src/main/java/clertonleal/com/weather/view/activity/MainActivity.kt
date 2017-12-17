@@ -11,10 +11,10 @@ import clertonleal.com.weather.adapter.WeatherHomeAdapter
 import clertonleal.com.weather.databinding.ActivityMainBinding
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
-import clertonleal.com.weather.rest.CityRest
-import clertonleal.com.weather.rest.WeatherRest
+import clertonleal.com.weather.service.CityService
+import clertonleal.com.weather.service.WeatherService
 import clertonleal.com.weather.util.*
-import clertonleal.com.weather.view.`interface`.HomeView
+import clertonleal.com.weather.view.delegate.HomeView
 import clertonleal.com.weather.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -24,10 +24,10 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var cityRest: CityRest
+    lateinit var cityService: CityService
 
     @Inject
-    lateinit var weatherRest: WeatherRest
+    lateinit var weatherService: WeatherService
 
     private var viewModel: HomeViewModel? = null
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WeatherApplication.component?.inject(this)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        viewModel = HomeViewModel(view, cityRest, weatherRest)
+        viewModel = HomeViewModel(view, cityService, weatherService)
         binding.viewModel = viewModel
         viewModel?.loadCity()
         viewModel?.loadWeather()

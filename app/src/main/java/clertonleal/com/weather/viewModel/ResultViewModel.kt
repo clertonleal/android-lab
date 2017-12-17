@@ -6,15 +6,14 @@ import android.view.View
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
 import clertonleal.com.weather.model.WeatherData
-import clertonleal.com.weather.rest.WeatherDataRest
-import io.reactivex.android.schedulers.AndroidSchedulers
+import clertonleal.com.weather.service.WeatherDataService
 import java.util.*
 
 
 class ResultViewModel(private val weather: ArrayList<Weather>,
                       private val days: Int,
                       private val city: City,
-                      private val weatherDataRest: WeatherDataRest,
+                      private val weatherDataService: WeatherDataService,
                       private val setResultInList: (ArrayList<Pair<WeatherData, WeatherData>>) -> Unit) {
 
     val loadingVisibility = ObservableInt(View.VISIBLE)
@@ -22,8 +21,7 @@ class ResultViewModel(private val weather: ArrayList<Weather>,
     val errorVisibility = ObservableInt(View.GONE)
 
     fun loadResults() {
-        weatherDataRest.getWeatherData(city.id, Calendar.getInstance().get(Calendar.YEAR))
-                .observeOn(AndroidSchedulers.mainThread())
+        weatherDataService.getWeatherData(city.id, Calendar.getInstance().get(Calendar.YEAR))
                 .subscribe({ weatherResults ->
                     val filteredResults = filterWeatherResults(weatherResults, weather, days)
                     setResultInList(filteredResults)

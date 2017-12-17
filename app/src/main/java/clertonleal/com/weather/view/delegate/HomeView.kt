@@ -1,4 +1,4 @@
-package clertonleal.com.weather.view.`interface`
+package clertonleal.com.weather.view.delegate
 
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather

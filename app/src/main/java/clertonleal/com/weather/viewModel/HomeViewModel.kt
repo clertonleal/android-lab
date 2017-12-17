@@ -6,15 +6,14 @@ import android.view.View
 import clertonleal.com.weather.BR
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
-import clertonleal.com.weather.rest.CityRest
-import clertonleal.com.weather.rest.WeatherRest
-import clertonleal.com.weather.view.`interface`.HomeView
-import io.reactivex.android.schedulers.AndroidSchedulers
+import clertonleal.com.weather.service.CityService
+import clertonleal.com.weather.service.WeatherService
+import clertonleal.com.weather.view.delegate.HomeView
 
 
 class HomeViewModel(val view: HomeView,
-                    private val cityRest: CityRest,
-                    private val weatherRest: WeatherRest) : BaseObservable() {
+                    private val cityService: CityService,
+                    private val weatherService: WeatherService) : BaseObservable() {
 
     @Bindable
     var selectedCity: City? = City(district = "---", stateAcronym = "---")
@@ -37,7 +36,7 @@ class HomeViewModel(val view: HomeView,
         }
     }
 
-    private var cities: List<City> = arrayListOf()
+    var cities: List<City> = arrayListOf()
     var weather: List<Weather> = arrayListOf()
     val loadingVisibility = ObservableInt(View.VISIBLE)
     val errorVisibility = ObservableInt(View.GONE)
@@ -46,8 +45,7 @@ class HomeViewModel(val view: HomeView,
     val numberOfDays = ObservableField<String>()
 
     fun loadCity() {
-        cityRest.getCities()
-                .observeOn(AndroidSchedulers.mainThread())
+        cityService.getCities()
                 .subscribe({
                     cities = it
                     loadingVisibility.set(View.GONE)
@@ -59,8 +57,7 @@ class HomeViewModel(val view: HomeView,
     }
 
     fun loadWeather() {
-        weatherRest.getWeather()
-                .observeOn(AndroidSchedulers.mainThread())
+        weatherService.getWeather()
                 .subscribe({
                     weather = it
                     loadingVisibility.set(View.GONE)

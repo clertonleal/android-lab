@@ -11,7 +11,7 @@ import clertonleal.com.weather.adapter.ResultsAdapter
 import clertonleal.com.weather.databinding.ActivityResultBinding
 import clertonleal.com.weather.model.City
 import clertonleal.com.weather.model.Weather
-import clertonleal.com.weather.rest.WeatherDataRest
+import clertonleal.com.weather.service.WeatherDataService
 import clertonleal.com.weather.util.NUMBER_OF_DAYS
 import clertonleal.com.weather.util.SELECTED_CITY
 import clertonleal.com.weather.util.SELECTED_WEATHER
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class ResultActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var weatherDataRest: WeatherDataRest
+    lateinit var weatherDataService: WeatherDataService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class ResultActivity : AppCompatActivity() {
         val numberOfDays = intent.getIntExtra(NUMBER_OF_DAYS, 0)
         val city = intent.getParcelableExtra<City>(SELECTED_CITY)
 
-        val viewModel = ResultViewModel(weather, numberOfDays, city, weatherDataRest, {
+        val viewModel = ResultViewModel(weather, numberOfDays, city, weatherDataService, {
             recyclerView.adapter = ResultsAdapter(it)
         })
 
