@@ -12,16 +12,27 @@
         android:roundIcon="@mipmap/weather_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity">
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.SelectCitiesActivity" android:label="@string/cities"/>
-        <activity android:name=".view.activity.SelectWeatherActivity" android:label="@string/weather"/>
-        <activity android:name=".view.activity.ResultActivity" android:label="@string/results"/>
+        <activity
+            android:name=".view.activity.SelectCitiesActivity"
+            android:label="@string/cities"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SelectWeatherActivity"
+            android:label="@string/weather"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.ResultActivity"
+            android:label="@string/results"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
